@@ -7,7 +7,10 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created(){
+    console.log(process.env.API_PATH, process.env.APP_ID);
+  }
 }
 </script>
 
