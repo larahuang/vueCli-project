@@ -3,16 +3,20 @@
  <Child  :interest="interest" :lists="lists"/>
  <p>Button 傳來的 Message： {{ msg }}</p>
  <p> {{ toMsg }}</p>
+ <Button></Button>
+ <Message></Message>
   </div>
 </template>
 
 <script>
 import Child from './Child.vue'
+import Button from './Button.vue'
+import Message from './Message.vue'
 import { EventBus } from "../utils/bus.js"
 export default {
   name: 'Home',
   components: {
-    Child
+    Child,Button,Message
   },
   data () {
     return {
