@@ -7,15 +7,19 @@
 
       </li>
     </ul>
+    <a style="background-color:green;border-radius: 4px;color:white;padding:8px 12px;" @click="sendMessage">Send</a>
+    <a style="background-color:green;border-radius: 4px;color:white;padding:8px 12px;" @click="toMsg">TO</a>
   </div>
 </template>
 
 <script>
+import { EventBus } from "../utils/bus.js"
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      message: '子傳父',
+      msg: '哈哈哈哈ㄚ',
     }
   },
   props : {
@@ -27,6 +31,18 @@ export default {
       type : Object,
       require : true
     }
-  }
+  },
+  methods: {
+    sendMessage() {
+      const vm=this;
+      // 發出 clickSendMsg 事件，並把 message 當作參數傳出去
+      EventBus.$emit("clickSendMsg", vm.message);
+    },
+    toMsg() {
+      const vm=this;
+      // 發出 clickToMsg 事件，並把 message 當作參數傳出去
+      EventBus.$emit("clickToMsg", vm.msg);
+    },
+  },
 }
 </script>

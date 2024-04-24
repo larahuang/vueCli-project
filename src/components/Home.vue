@@ -1,11 +1,14 @@
 <template>
   <div class="home">
  <Child  :interest="interest" :lists="lists"/>
+ <p>Button 傳來的 Message： {{ msg }}</p>
+ <p> {{ toMsg }}</p>
   </div>
 </template>
 
 <script>
 import Child from './Child.vue'
+import { EventBus } from "../utils/bus.js"
 export default {
   name: 'Home',
   components: {
@@ -13,14 +16,26 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       interest:'游泳',
       lists:[
         {id:'001',todo:'去旅行'},
         {id:'002',todo:'寫部落格'}
-      ]
+      ],
+      msg: '',
+      toMsg:''
     }
-  }
+  },
+  mounted() {
+    const vm=this;
+    // 監聽事件
+    EventBus.$on("clickSendMsg", (msg) => (vm.msg = msg));
+    EventBus.$on("clickToMsg", (msg) => (vm.toMsg = msg));
+  },
+  beforeDestroy() {
+    // 銷毁監聽
+    EventBus.$off("clickSendMsg");
+    EventBus.$off("clickToMsg");
+  },
 }
 </script>
 
