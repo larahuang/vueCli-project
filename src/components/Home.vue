@@ -5,6 +5,11 @@
  <p> {{ toMsg }}</p>
  <Button></Button>
  <Message></Message>
+
+    <div>
+      <input type="text" v-model="watchMessage" />
+      <div> {{copyMessage}}</div>
+    </div>
   </div>
 </template>
 
@@ -26,7 +31,10 @@ export default {
         {id:'002',todo:'寫部落格'}
       ],
       msg: '',
-      toMsg:''
+      toMsg:'',
+
+      copyMessage:'',
+      watchMessage:'How',
     }
   },
   mounted() {
@@ -40,23 +48,12 @@ export default {
     EventBus.$off("clickSendMsg");
     EventBus.$off("clickToMsg");
   },
+  watch:{
+    watchMessage(value){
+      this.copyMessage=value;
+    }
+  },
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+
